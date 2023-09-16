@@ -4,7 +4,7 @@ var express = require('express');
 const octokit = new Octokit.Octokit({
   request: {
     fetch: fetch,
-  }
+  },
   auth: process.env.GITHUB_TOKEN 
 });
 var router = express.Router();
