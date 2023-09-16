@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+var fetch = require('node-fetch');
 const Octokit = require('@octokit/rest');
 const octokit = new Octokit.Octokit({
   request: {
@@ -7,6 +7,7 @@ const octokit = new Octokit.Octokit({
   auth: process.env.GITHUB_TOKEN 
 });
 
+<<<<<<< HEAD
 // create repository
 async function createRepo(repoName){ 
   var res = await octokit.rest.repos.createForAuthenticatedUser({
@@ -69,11 +70,59 @@ async function mergeBranch(owner, repo, head){
   return res;
 }
 
-module.exports = {
-  createRepo,
-  getFile,
-  updateFile,
-  getReference,
-  createBranch,
-  mergeBranch
+async function createPR(repoName, branchName){
+    res = await octokit.rest.pulls.create({
+        owner: "TestWriter23",
+        repo: repoName,
+        head: branchName,
+        base: "main",
+    })
+    return res;
 }
+
+async function getCreatedPR(){ // get all issues/PRs in created by user
+    res = await octokit.rest.issues.list({
+        filter: "created",
+    })
+    return res;
+}
+
+async function getAssignedPR(){ //get all issues/PRs that are assigned to user to review
+    res = await octokit.rest.issues.list({
+        filter: "assigned",
+    });
+    return res;
+}
+
+async function getAllComments(repoName){ // all comments in a repo
+    res = await octokit.rest.issues.listCommentsForRepo({
+        owner: "TestWriter23",
+        repo: repoName,
+    });
+    return res;
+}
+
+async function getPrComments(repoName, PrNumber){ // comments for a specific pr
+    res = await octokit.rest.issues.listCommentsForRepo({
+        owner: "TestWriter23",
+        repo: repoName,
+        issue_number: PrNumber,
+    });
+    return res;
+}
+
+module.exports = {
+    createRepo,
+    getFile,
+    updateFile,
+    getReference,
+    createBranch,
+    mergeBranch,
+    createPR,
+    getCreatedPR,
+    getAssignedPR,
+    getAllComments,
+    createRepo,
+    getPrComments
+}
+        

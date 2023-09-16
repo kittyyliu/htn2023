@@ -7,8 +7,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+<<<<<<< HEAD
 var usersRouter = require('./routes/users');
 var authorsRouter = require('./routes/authors');
+=======
+// var usersRouter = require('./routes/users');
+var readersRouter = require('./routes/readers')
+>>>>>>> 6b69425 (added routes for creating/reading PRs and comments)
 
 var app = express();
 
@@ -23,8 +28,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+<<<<<<< HEAD
 app.use('/users', usersRouter);
 app.use('/authors', authorsRouter);
+=======
+// app.use('/users', usersRouter);
+app.use('/reader', readersRouter)
+>>>>>>> 6b69425 (added routes for creating/reading PRs and comments)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
