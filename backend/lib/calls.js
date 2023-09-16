@@ -7,7 +7,6 @@ const octokit = new Octokit.Octokit({
   auth: process.env.GITHUB_TOKEN 
 });
 
-<<<<<<< HEAD
 // create repository
 async function createRepo(repoName){ 
   var res = await octokit.rest.repos.createForAuthenticatedUser({
