@@ -5,7 +5,7 @@ const octokit = new Octokit.Octokit({
   request: {
     fetch: fetch,
   },
-  auth: '460ec2061128944331e3146e548b910d97c95b45'
+  auth: process.env.GITHUB_TOKEN 
 });
 var router = express.Router();
 
@@ -13,9 +13,9 @@ async function test(){
   await octokit.request('POST /user/repos', {
     name: 'Hello-World',
     description: 'This is your first repo!',
-    username: "TestAuthor",
+    username: "TestWriter2023",
     headers: {
-      Authorization: `token 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`,
+      Authorization: `token ` + process.env.GITHUB_TOKEN,
       Accept: 'application/vnd.github.machine-man-preview+json',
 
     }
