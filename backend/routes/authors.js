@@ -25,11 +25,13 @@ async function createWork(){
 }
 
 async function test(){
-  res = calls.createBranch(
+  ref = await calls.getReference("TestWriter23", "Hello-World", "heads/main");
+  console.log(ref)
+  res = await calls.createBranch(
     "TestWriter23",
     "Hello-World",
     "testBranchA",
-    "7108a26"
+    ref.data.object.sha
   );
   return res
 }
@@ -38,9 +40,21 @@ async function test(){
 /* GET */
 router.get('/', async function(req, res, next) {
   try {
-    //const data = await test();
-    const data = await calls.getFile("TestWriter23", "Hello-World", "README.md");
+    const data = await test();
+    //const data = await calls.getFile("TestWriter23", "Hello-World", "README.md");
     
+    res.json(data);
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+router.post('/createWork', async function(req, res, next) {
+  try {
+    const name = req.query.name;
+    const data = await calls.createRepo(name);
     res.json(data);
   }
   catch (error) {

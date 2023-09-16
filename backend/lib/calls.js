@@ -60,7 +60,7 @@ async function createBranch(owner, repo, branchName, sha){
 }
 
 async function mergeBranch(owner, repo, head){
-  var res = await  octokit.rest.repos.merge({
+  var res = await octokit.rest.repos.merge({
     owner: owner,
     repo: repo,
     base: 'master',
@@ -73,6 +73,7 @@ module.exports = {
   createRepo,
   getFile,
   updateFile,
+  getReference,
   createBranch,
   mergeBranch
 }
