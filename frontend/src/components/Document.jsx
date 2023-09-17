@@ -1,18 +1,22 @@
-import { useState } from 'react';
-export default function DocumentEditor() {
-	const [count, setCount] = useState(0);
-  
+import { useEffect } from 'react';
+export default function DocumentEditor({content, setContent}) {
+	//useEffect(()=> {
+	//	fetch('http://localhost:3000/')
+	//}, []);
+
 	const handleChange = (event) => {
-		console.log(event.target.value);
+		setContent(event.target.value)
 	}
   
 	return (
 	  <div style={{height: '100%', width: '100%'}}>
-		<textarea style={{height: '100%', width: '100%', borderStyle: 'None', outline: 'None'}}
-			type="textarea"
-			name="textvalue"
-			onChange={handleChange}>
-		</textarea>
+		<div style={{padding: 'auto', width:'70%', height: '70%'}}>
+			<pre contentEditable="true" style={{height: '100%', width: '100%', borderStyle: 'None', outline: 'None'}}
+				type="textarea"
+				name="textvalue"
+				onChange={handleChange}>
+			</pre>
+		</div>
 	  </div>
 	);
   }
