@@ -17,7 +17,6 @@ router.get('/getCreatedPR', async function(req, res, next) {
   }
 });
 
-
 router.get('/getAssignedPR', async function(req, res, next) {
     try {
       const data = await calls.getAssignedPR();
