@@ -50,6 +50,18 @@ router.get('/', async function(req, res, next) {
   }
 });
 
+router.get('/getWork', async function(req, res, next) {
+  try {
+    const { owner, repo, path } = req.query;
+    const data = await calls.getFile(owner, repo, path);
+    res.json(data)
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+})
+
 router.post('/createWork', async function(req, res, next) {
   try {
     const name = req.query.name;
