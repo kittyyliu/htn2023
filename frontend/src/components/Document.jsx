@@ -7,12 +7,24 @@ export default function DocumentEditor() {
 	}
   
 	return (
-	  <div style={{height: '100%', width: '100%'}}>
-		<textarea style={{height: '100%', width: '100%', borderStyle: 'None', outline: 'None'}}
+		<div style={{ height: '100%', width: '100%' }}>
+		  <textarea
+			style={{
+			  height: '80%',
+			  width: '80%',
+			  borderStyle: 'none',
+			  outline: 'none',
+			  padding: '20px', // Add padding here
+			}}
 			type="textarea"
 			name="textvalue"
-			onChange={handleChange}>
-		</textarea>
-	  </div>
-	);
-  }
+			onChange={handleChange}
+		  ></textarea>
+		</div>
+	  );
+	}	
+	
+	
+	
+	
+	
