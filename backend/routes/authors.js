@@ -36,7 +36,6 @@ async function test(){
   return res
 }
 
-
 /* GET */
 router.get('/', async function(req, res, next) {
   try {
@@ -62,5 +61,34 @@ router.post('/createWork', async function(req, res, next) {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+router.post('/createUpdateFile', async function(req, res, next) {
+  try {
+    const {owner, repo, path, message, content, sha, authorName, authorEmail} = req.query;
+    const data = await calls.updateFile(
+      owner, repo, path, message, content, sha, authorName, authorEmail
+    );
+    res.json(data);
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+router.post('/createBranch', async function(req, res, next) {
+  try {
+    const {owner, repo, path, message, content, sha, authorName, authorEmail} = req.query;
+    const data = await calls.updateFile(
+      owner, repo, path, message, content, sha, authorName, authorEmail
+    );
+    res.json(data);
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 module.exports = router;
