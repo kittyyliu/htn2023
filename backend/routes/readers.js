@@ -51,4 +51,39 @@ router.get('/getPrComments', async function (req, res, next){
     }
 })
 
+router.get('/createGeneralComment', async function (req, res, next){
+  try {
+      const data = await calls.createGeneralComment(req.query.repo, req.query.pr, req.query.comment);
+      res.json(data);
+    }
+    catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+})
+
+
+router.get('/createInlineComment', async function (req, res, next){
+  try {
+      const data = await calls.createInlineComment(req.query.repo, rep.query.pr, rep.query.comment, rep.query.commit, rep.query.path, rep.query.start, rep.query.end);
+      res.json(data);
+    }
+    catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+})
+
+
+router.get('/replyComment', async function (req, res, next){
+  try {
+      const data = await calls.replyComment(req.query.repo, req.query.pr, req.query.commentId, req.query.comment );
+      res.json(data);
+    }
+    catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+})
+
 module.exports = router;

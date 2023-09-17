@@ -79,6 +79,45 @@ async function createPR(repoName, branchName){
     return res;
 }
 
+//create a comment to a PR as a whole, not any specific line
+async function createGeneralComment(repoName, prNumber, comment){
+    res = await octokit.rest.issues.createComment({
+        owner: "TestWriter23",
+        repo: repoName,
+        issue_number: prNumber,
+        body: comment,
+    })
+    return res;
+}
+
+//create a comment to review line(s) in a PR, specify the start and endline!
+async function createInlineComment(repoName, prNumber, comment, commitNumber, filePath, startLine, endLine){
+    res = await octokit.rest.pulls.createReviewComment({
+        owner: "TestWriter23",
+        repo: repoName,
+        pull_number: prNumber,
+        body: comment,
+        commit_id: commitNumber,
+        path:filePath,
+        start_line: startLine,
+        line: endLine,
+    })
+    return res;
+}
+
+
+//reply to a review comment. Can only be done once, can't reply to a reply 
+async function replyComment(repoName, prNumber, commentNumber, comment){
+    res = await octokit.rest.pulls.createReplyForReviewComment({
+        owner: "TestWriter23",
+        repo: repoName,
+        pull_number: prNumber,
+        comment_id: commentNumber,
+        body: comment,
+    })
+    return res;
+}
+
 async function getCreatedPR(){ // get all issues/PRs in created by user
     res = await octokit.rest.issues.list({
         filter: "created",
@@ -122,6 +161,9 @@ module.exports = {
     getAssignedPR,
     getAllComments,
     createRepo,
-    getPrComments
+    getPrComments,
+    createGeneralComment,
+    createInlineComment,
+    replyComment
 }
         
